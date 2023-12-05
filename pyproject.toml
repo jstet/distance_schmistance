@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "distance_schmistance"
+version = "0.1.0"
+description = "Edit Distance"
+authors = ["jstet <mail@jstet.net>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+
+[tool.poetry.dev-dependencies]
+maturin = "^1.4"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.3"
+
+[build-system]
+requires = ["maturin>=1.4,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "distance_schmistance"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+]
+dynamic = ["version"]
+
+[tool.maturin]
+features = ["pyo3/extension-module"]
+module-name = "distance_schmistance._distance_schmistance"
