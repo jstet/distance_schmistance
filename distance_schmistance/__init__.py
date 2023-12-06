@@ -52,10 +52,7 @@ def cost_matrix(dim: int, dct: dict, code_dct: dict = None) -> list:
                     costs[ord(code_dct[key])][ord(code_dct[key2])] = value2
     return costs
 
-def edit_distance(s1, s2, insert_costs = None, delete_costs = None, substitute_costs = None):
-    delete_costs = cost_matrix(1, delete_costs)
-    insert_costs = cost_matrix(1, insert_costs)
-    substitute_costs = cost_matrix(2, substitute_costs)
+def edit_distance(s1, s2, insert_costs, substitute_costs, delete_costs):
     return _wagner_fischer(s1, s2, insert_costs=insert_costs, delete_costs=delete_costs, substitute_costs=substitute_costs)
 
 

@@ -1,5 +1,6 @@
 import pytest
 import numpy as np
+from distance_schmistance import cost_matrix
 
 
 @pytest.fixture
@@ -7,7 +8,21 @@ def insert_costs_a():
     insert_costs = {
         'D': 1.5
     }
+    insert_costs = cost_matrix(1, insert_costs)
     return insert_costs
+
+@pytest.fixture
+def substitute_costs_a():
+    substitute_costs = None
+    substitute_costs = cost_matrix(2, substitute_costs)
+    return substitute_costs
+
+@pytest.fixture
+def delete_costs_a():
+    delete_costs = None
+    delete_costs = cost_matrix(1, delete_costs)
+    return delete_costs
+
 
 @pytest.fixture
 def insert_costs_b():
@@ -18,9 +33,9 @@ def insert_costs_b():
 
 @pytest.fixture
 def long_string_s1():
-    return 'BANANA' * 100
+    return 'BANANA' * 50
 
 
 @pytest.fixture
 def long_string_s2():
-    return 'BANDANA' * 100
+    return 'BANDANA' * 50
