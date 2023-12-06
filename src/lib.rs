@@ -51,15 +51,16 @@ pub fn _wagner_fischer(
             if shorter.chars().nth(i - 1).unwrap() == longer.chars().nth(j - 1).unwrap() {
                 dp[i] = prev;
             } else {
-                dp[i] = f64::min(
-                    prev + delete_costs[shorter.chars().nth(i - 1).unwrap() as u8 as usize],
-                    f64::min(
-                        dp[i] + insert_costs[longer.chars().nth(j - 1).unwrap() as u8 as usize],
-                        dp[i - 1] + substitute_costs[shorter.chars().nth(i - 1).unwrap() as u8 as usize][
-                            longer.chars().nth(j - 1).unwrap() as u8 as usize
-                        ]
-                        ),
-                    )
+                dp[i] = match (
+                    delete_costs[shorter.chars().nth(i - 1).unwrap() as u8 as usize],
+                    insert_costs[longer.chars().nth(j - 1).unwrap() as u8 as usize],
+                    substitute_costs[shorter.chars().nth(i - 1).unwrap() as u8 as usize]
+                        [longer.chars().nth(j - 1).unwrap() as u8 as usize],
+                ) {
+                    (delete_cost, insert_cost, substitute_cost) => {
+                        f64::min(prev + delete_cost, f64::min(dp[i] + insert_cost, dp[i - 1] + substitute_cost))
+                    }
+                };
             }
             
             prev = temp;
